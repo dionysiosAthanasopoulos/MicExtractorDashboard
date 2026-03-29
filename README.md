@@ -72,7 +72,7 @@ mvn clean package
     <a href="https://docs.gitlab.com/user/profile/personal_access_tokens"><img src="src/main/resources/GitLabDeveloperSettings.png" align="center" height="30%"></a>
 
 ## Execution
-- Run the frontend (the 'main' method is stored in the '<a href="https://github.com/dionysiosAthanasopoulos/MicExtractorDashboard/blob/main/src/main/java/MicGenAI/MicExtractor/dashboard/MicExtractorDashboardApplication.java">MicExtractorDashboardApplication</a>' class):
+- Run the frontend (the 'main' method is stored in the '<a href="https://github.com/dionysiosAthanasopoulos/MicExtractorDashboard/blob/master/src/main/java/MicGenAI/MicExtractor/dashboard/MicExtractorDashboardApplication.java">MicExtractorDashboardApplication</a>' class):
 
 ```bash
 mvn clean compile exec:java
@@ -105,7 +105,7 @@ The syntax of the JSON payload is provided below (if we assume that you had prov
 }
 ```
 
-The Java class <a href="https://github.com/dionysiosAthanasopoulos/MicExtractorDashboard/blob/main/src/main/java/httpClients/AwsHttpPost.java">AwsHttpPost</a> of the dashboard calculates the AWS signature version 4 of the request that will be sent to 'MicExtractorAPI' and finally submits the request to 'MicExtractorAPI'.
+The Java class <a href="https://github.com/dionysiosAthanasopoulos/MicExtractorDashboard/blob/master/src/main/java/httpClients/AwsHttpPost.java">AwsHttpPost</a> of the dashboard calculates the AWS signature version 4 of the request that will be sent to 'MicExtractorAPI' and finally submits the request to 'MicExtractorAPI'.
 
 ## Uses
 The use cases of the dashboard are the following:
