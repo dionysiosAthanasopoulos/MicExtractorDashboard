@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MicGenAI.MicExtractor.dashboard.DataLoader">
+
+    <left>
+        <VBox spacing="0" style="-fx-background-color: gray" prefWidth="400.0">
+            <!-- Top Bar -->
+            <VBox alignment="CENTER_LEFT" spacing="5.0" style="-fx-padding: 15; ">
+                <Label text="GitHub/GitLab repository*:" styleClass="status-label-fx-background-color: #2c3e50;" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="path" prefWidth="300.0"/>
+            </VBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 15; ">
+                <Label text="GitHub/GitLab access token*:" styleClass="status-label-fx-background-color: #2c3e50;" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="token" prefWidth="193.0"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 15; ">
+                <Label text="AWS access key*:" styleClass="status-label-fx-background-color: #2c3e50;" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="accessKey" prefWidth="261.0"/>
+           </HBox>
+           <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 15; ">
+                <Label text="AWS secret key*:" styleClass="status-label-fx-background-color: #2c3e50;" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="secretKey" prefWidth="262.0"/>
+           </HBox>
+           <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 15; ">
+                <Label text="MicExtractorAPI key*:" styleClass="status-label-fx-background-color: #2c3e50;" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="micExtractorApiKey" prefWidth="233.0"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="5.0" style="-fx-padding: 15; ">
+                <Label fx:id="icsLabel" text="Internal cohesion:" styleClass="status-label-fx-background-color: #2c3e50;" style="-fx-font-weight: bold;"/>
+                <Slider fx:id="ics" max="1.0" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="5.0" style="-fx-padding: 15; ">
+                <Label fx:id="ecsLabel" text="External cohesion:" styleClass="status-label-fx-background-color: #2c3e50;" style="-fx-font-weight: bold;"/>
+                <Slider fx:id="ecs" max="1.0" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 15; ">
+                <Label text="UML editor:" styleClass="status-label-fx-background-color: #2c3e50;" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="umlEditor" promptText="Select" prefWidth="110.0" />
+                <Label text="UML design:" styleClass="status-label-fx-background-color: #2c3e50;" style="-fx-font-weight: bold;"/>
+                <Button fx:id="userDefined" text="Load File" prefWidth="90.0"/>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="5.0" style="-fx-padding: 15;">
+            	<Button fx:id="btnInvoke" text="'MicExtractorAPI'" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="150.0"/>
+                <Button fx:id="btnSave" text="Save Response" style="-fx-background-color: #27ae60; -fx-text-fill: white;" />
+            	<Button fx:id="btnVisualize" text="Save Design" style="-fx-background-color: #27ae60; -fx-text-fill: white;" />
+            </HBox>
+        </VBox>
+    </left>
+
+	<!-- 1. HEADER & KPI CARDS -->
+    <top>
+        <HBox fx:id="kpis" spacing="0" alignment="CENTER">
+            <!-- KPI Row (Increased Padding for better look) -->
+            <HBox alignment="CENTER" spacing="30.0" style="-fx-padding: 25; -fx-background-color: white; -fx-border-color: #bdc3c7; -fx-border-width: 0 0 1 0; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 5);">
+                
+                <!-- KPI 1 -->
+                <VBox alignment="CENTER" style="-fx-background-color: #e8f8f5; -fx-padding: 15; -fx-background-radius: 8; -fx-min-width: 50;">
+                    <Label fx:id="totalMics" text="Number of Microservices Generated" textFill="#7f8c8d">
+                    	<font>
+                            <Font name="System Bold" size="15.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="kpiTotalMics" text="0" textFill="#27ae60">
+                    	<font>
+                            <Font name="System Bold" size="28.0" />
+                        </font>
+                    </Label>
+                </VBox>
+
+                <!-- KPI 2 -->
+                <VBox alignment="CENTER" style="-fx-background-color: #eaf2f8; -fx-padding: 15; -fx-background-radius: 8; -fx-min-width: 50;">
+                    <Label fx:id="totalClasses" text="Total Number of Classes" textFill="#7f8c8d">
+                    	<font>
+                            <Font name="System Bold" size="15.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="kpiTotalClasses" text="0" textFill="#2980b9">
+                        <font>
+                            <Font name="System Bold" size="28.0" />
+                        </font>
+                    </Label>
+                </VBox>
+
+                <!-- KPI 3 -->
+                <VBox alignment="CENTER" style="-fx-background-color: #fef9e7; -fx-padding: 15; -fx-background-radius: 8; -fx-min-width: 50;">
+                    <Label fx:id="totalUrels" text="Total Number of UML Relationships" textFill="#7f8c8d">
+                    	<font>
+                            <Font name="System Bold" size="15.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="kpiTotalUrels" text="0" textFill="#f39c12">
+                        <font>
+                            <Font name="System Bold" size="28.0" />
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+        </HBox>
+    </top>
+
+    <!-- 2. MAIN CONTENT -->
+    <center>
+        <SplitPane fx:id="splitPane" dividerPositions="0.6" orientation="VERTICAL">
+            <items>
+                <VBox style="-fx-background-color: white;">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15"/>
+                    </padding>
+                    
+                    <HBox alignment="CENTER" spacing="15">
+                        <Label text="Chart View:" textFill="#7f8c8d">
+                        	<font>
+                            	<Font name="System Bold" />
+                        	</font>
+                    	</Label>
+                        <RadioButton fx:id="classRadio" text="UML Classes">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="chartToggleGroup"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="umlRelRadio" text="UML Relationships" toggleGroup="$chartToggleGroup"/>
+                    </HBox>
+                    <StackedBarChart fx:id="chart" animated="true" VBox.vgrow="ALWAYS" legendSide="RIGHT">
+                        <xAxis>
+                            <CategoryAxis fx:id="xAxis" label="Microservice" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis fx:id="yAxis" label="Number" />
+                        </yAxis>
+                    </StackedBarChart>
+                </VBox>
+            </items>
+        </SplitPane>
+    </center>
+    <bottom>
+    	<HBox alignment="CENTER" style="-fx-background-color: white;" spacing="50">
+	        <Label fx:id="logo"/>
+	        <HBox alignment="CENTER" style="-fx-background-color: white;" spacing="0">
+	       		<Label text="Copyright 2026">
+	       			<font>
+	       				<Font name="System Bold"/>
+	       			</font>
+	       		</Label>
+	       		<Label fx:id="copyrightSymbol"/>
+	       	</HBox>
+        </HBox>
+    </bottom>
+</BorderPane>
