@@ -1,4 +1,4 @@
-# AI Dashboard of UML Microservice Decomposition
+# Dashboard of Analytical AI for UML Microservice Decomposition
 
 <a href="https://www.amazon.com/dp/B0GTG299BW"><img src="src/main/resources/BookTitle.png" align="right" height="400"></a>
 
