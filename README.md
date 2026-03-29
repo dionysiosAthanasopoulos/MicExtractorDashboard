@@ -54,8 +54,6 @@ mvn clean package
     - Go to <a href="https://aws.amazon.com/marketplace">https://aws.amazon.com/marketplace</a>
     - Type in the search bar the product name, 'MicExtractorAPI'
 - ![](https://img.shields.io/static/v1?label=&message=Attention:&color=red) You need to subscribe to the usage plan of 'MicExtractorAPI' (otherwise the dashboard will not work)
-    - the usage plan associated with 'MicExtractorAPI' is the following:
-        - zczczx
     - when your subscription request is completed, you will be notified with an API key associated to your subscription to 'MicExtractorAPI'. You must include the API key in the 'x-api-key' header in requests to 'MicExtractorAPI' (see [Execution](#execution) of the dashboard below) because 'MicExtractorAPI' is secured in the AWS API Gateway by using an API key for each subscription
 - ![](https://img.shields.io/static/v1?label=&message=Attention:&color=red) You need to activate your AWS IAM authentication for API Gateway REST APIs following these steps:
     - Go to <a href="https://aws.amazon.com/console">https://aws.amazon.com/console</a>
